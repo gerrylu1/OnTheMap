@@ -13,6 +13,9 @@
 		EEC24D802473CEBC004FD970 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC24D7E2473CEBC004FD970 /* Main.storyboard */; };
 		EEC24D822473CEBD004FD970 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEC24D812473CEBD004FD970 /* Assets.xcassets */; };
 		EEC24D852473CEBD004FD970 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC24D832473CEBD004FD970 /* LaunchScreen.storyboard */; };
+		EEC24D932473DFE7004FD970 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D922473DFE7004FD970 /* APIClient.swift */; };
+		EEC24D972473E0B9004FD970 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D962473E0B9004FD970 /* StudentInformation.swift */; };
+		EEC24D992473E4B1004FD970 /* StudentInformationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D982473E4B1004FD970 /* StudentInformationResults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		EEC24D812473CEBD004FD970 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEC24D842473CEBD004FD970 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEC24D862473CEBD004FD970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEC24D922473DFE7004FD970 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		EEC24D962473E0B9004FD970 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		EEC24D982473E4B1004FD970 /* StudentInformationResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +93,35 @@
 		EEC24D8E2473D052004FD970 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EEC24D8F2473DF0B004FD970 /* APIClient */,
+				EEC24D902473DF17004FD970 /* APIRequests */,
+				EEC24D912473DF33004FD970 /* APIResponses */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		EEC24D8F2473DF0B004FD970 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				EEC24D922473DFE7004FD970 /* APIClient.swift */,
+			);
+			name = APIClient;
+			sourceTree = "<group>";
+		};
+		EEC24D902473DF17004FD970 /* APIRequests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = APIRequests;
+			sourceTree = "<group>";
+		};
+		EEC24D912473DF33004FD970 /* APIResponses */ = {
+			isa = PBXGroup;
+			children = (
+				EEC24D962473E0B9004FD970 /* StudentInformation.swift */,
+				EEC24D982473E4B1004FD970 /* StudentInformationResults.swift */,
+			);
+			name = APIResponses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,9 +195,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEC24D972473E0B9004FD970 /* StudentInformation.swift in Sources */,
 				EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */,
 				EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */,
+				EEC24D992473E4B1004FD970 /* StudentInformationResults.swift in Sources */,
 				EEC24D7B2473CEBC004FD970 /* SceneDelegate.swift in Sources */,
+				EEC24D932473DFE7004FD970 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
