@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EE886C072474463D00752672 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C062474463D00752672 /* APIResponse.swift */; };
+		EE886C09247453CD00752672 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C08247453CD00752672 /* TabBarController.swift */; };
 		EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D782473CEBC004FD970 /* AppDelegate.swift */; };
 		EEC24D7B2473CEBC004FD970 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */; };
 		EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D7C2473CEBC004FD970 /* LoginViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		EE886C062474463D00752672 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		EE886C08247453CD00752672 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EEC24D752473CEBC004FD970 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC24D782473CEBC004FD970 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				EEC24D782473CEBC004FD970 /* AppDelegate.swift */,
 				EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */,
 				EEC24D7C2473CEBC004FD970 /* LoginViewController.swift */,
+				EE886C08247453CD00752672 /* TabBarController.swift */,
 				EEC24D8D2473D03D004FD970 /* View */,
 			);
 			name = Controller;
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEC24D972473E0B9004FD970 /* StudentInformation.swift in Sources */,
+				EE886C09247453CD00752672 /* TabBarController.swift in Sources */,
 				EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */,
 				EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */,
 				EEC24D992473E4B1004FD970 /* StudentInformationResults.swift in Sources */,

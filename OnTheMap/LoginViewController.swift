@@ -23,6 +23,11 @@ class LoginViewController: UIViewController {
         addPaddingToTextField(textField: passwordTextField, padding: 10)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     @IBAction func login(_ sender: Any) {
         setLoggingIn(true)
         APIClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
@@ -39,6 +44,7 @@ class LoginViewController: UIViewController {
             return
         }
         print(APIClient.Auth.sessionId)
+        performSegue(withIdentifier: "completeLogin", sender: nil)
     }
     
     func setLoggingIn(_ loggingIn: Bool) {
@@ -57,7 +63,8 @@ class LoginViewController: UIViewController {
     func showLoginFailure(message: String) {
         let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
+        //show(alertVC, sender: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
     func addPaddingToTextField(textField: UITextField, padding: CGFloat) {

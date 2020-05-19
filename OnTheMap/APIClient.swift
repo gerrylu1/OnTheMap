@@ -20,13 +20,13 @@ class APIClient {
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
         
-        case login
+        case session
         case signUp
         case getStudentLocation
         
         var stringValue: String {
             switch self {
-            case .login: return Endpoints.base + "/session"
+            case .session: return Endpoints.base + "/session"
             case .signUp: return "https://auth.udacity.com/sign-up"
             case .getStudentLocation: return Endpoints.base + "/StudentLocation?limit=\(limit)"
             }
@@ -39,7 +39,7 @@ class APIClient {
     
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         let loginRequest = LoginRequest(udacity: UserCredentials(username: username, password: password))
-        taskForPOSTRequest(url: Endpoints.login.url, responseType: SessionResponse.self, request: loginRequest, skipFirst5Characters: true) { (responseObject, error) in
+        taskForPOSTRequest(url: Endpoints.session.url, responseType: SessionResponse.self, request: loginRequest, skipFirst5Characters: true) { (responseObject, error) in
             guard let responseObject = responseObject else {
                 completion(false, error)
                 return
@@ -50,26 +50,34 @@ class APIClient {
         }
     }
     
+    class func logout(completion: @escaping () -> Void) {
+        var request = URLRequest(url: Endpoints.session.url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" {
+                xsrfCookie = cookie
+            }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            Auth.accountKey = ""
+            Auth.sessionId = ""
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+        task.resume()
+    }
+    
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, skipFirst5Characters: Bool = false, completion: @escaping (ResponseType?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard var data = data else {
+            parseData(responseType: ResponseType.self, data: data, error: error, skipFirst5Characters: skipFirst5Characters) { (responseObject, error) in
                 DispatchQueue.main.async {
-                    completion(nil, error)
-                }
-                return
-            }
-            if skipFirst5Characters {
-                let range = 5..<data.count
-                data = data.subdata(in: range)
-            }
-            do {
-                let responseObject = try JSONDecoder().decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(nil, error)
+                    completion(responseObject, error)
                 }
             }
         }
@@ -82,14 +90,16 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONEncoder().encode(body)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
-                parseData(data: data, error: error, skipFirst5Characters: skipFirst5Characters, completion: completion)
+            parseData(responseType: ResponseType.self, data: data, error: error, skipFirst5Characters: skipFirst5Characters) { (responseObject, error) in
+                DispatchQueue.main.async {
+                    completion(responseObject, error)
+                }
             }
         }
         task.resume()
     }
     
-    class func parseData<ResponseType: Decodable>(data: Data?, error: Error?, skipFirst5Characters: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func parseData<ResponseType: Decodable>(responseType: ResponseType.Type, data: Data?, error: Error?, skipFirst5Characters: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
         guard var data = data else {
             completion(nil, error)
             return
