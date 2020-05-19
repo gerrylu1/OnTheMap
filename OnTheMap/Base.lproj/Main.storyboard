@@ -53,6 +53,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vUy-xw-k4m"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYc-xy-Aye">
                                 <rect key="frame" x="88.5" y="404" width="237.5" height="30"/>
@@ -66,6 +69,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUj-NK-rV8">
                                         <rect key="frame" x="183.5" y="0.0" width="54" height="30"/>
                                         <state key="normal" title="Sign Up"/>
+                                        <connections>
+                                            <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e2p-Kh-hEu"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -94,6 +100,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="2Ru-rH-yyh" id="JfY-dY-jEf"/>
                         <outlet property="emailTextField" destination="aKe-4C-S64" id="x7s-kF-NnM"/>
                         <outlet property="loginButton" destination="Nhz-Sf-iJr" id="i5b-Jm-2Dd"/>
                         <outlet property="passwordTextField" destination="gj2-eb-mra" id="0fo-TW-fx0"/>

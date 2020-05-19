@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE886C072474463D00752672 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C062474463D00752672 /* APIResponse.swift */; };
 		EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D782473CEBC004FD970 /* AppDelegate.swift */; };
 		EEC24D7B2473CEBC004FD970 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */; };
 		EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D7C2473CEBC004FD970 /* LoginViewController.swift */; };
@@ -16,9 +17,15 @@
 		EEC24D932473DFE7004FD970 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D922473DFE7004FD970 /* APIClient.swift */; };
 		EEC24D972473E0B9004FD970 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D962473E0B9004FD970 /* StudentInformation.swift */; };
 		EEC24D992473E4B1004FD970 /* StudentInformationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D982473E4B1004FD970 /* StudentInformationResults.swift */; };
+		EEC24D9B2473E776004FD970 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D9A2473E776004FD970 /* Account.swift */; };
+		EEC24D9D2473E7BE004FD970 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D9C2473E7BE004FD970 /* Session.swift */; };
+		EEC24D9F2473E825004FD970 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D9E2473E825004FD970 /* SessionResponse.swift */; };
+		EEC24DA12473E971004FD970 /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24DA02473E971004FD970 /* UserCredentials.swift */; };
+		EEC24DA32473E9DA004FD970 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24DA22473E9DA004FD970 /* LoginRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE886C062474463D00752672 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		EEC24D752473CEBC004FD970 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC24D782473CEBC004FD970 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +37,11 @@
 		EEC24D922473DFE7004FD970 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		EEC24D962473E0B9004FD970 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		EEC24D982473E4B1004FD970 /* StudentInformationResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationResults.swift; sourceTree = "<group>"; };
+		EEC24D9A2473E776004FD970 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		EEC24D9C2473E7BE004FD970 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		EEC24D9E2473E825004FD970 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
+		EEC24DA02473E971004FD970 /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
+		EEC24DA22473E9DA004FD970 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +123,8 @@
 		EEC24D902473DF17004FD970 /* APIRequests */ = {
 			isa = PBXGroup;
 			children = (
+				EEC24DA02473E971004FD970 /* UserCredentials.swift */,
+				EEC24DA22473E9DA004FD970 /* LoginRequest.swift */,
 			);
 			name = APIRequests;
 			sourceTree = "<group>";
@@ -120,6 +134,10 @@
 			children = (
 				EEC24D962473E0B9004FD970 /* StudentInformation.swift */,
 				EEC24D982473E4B1004FD970 /* StudentInformationResults.swift */,
+				EEC24D9A2473E776004FD970 /* Account.swift */,
+				EEC24D9C2473E7BE004FD970 /* Session.swift */,
+				EEC24D9E2473E825004FD970 /* SessionResponse.swift */,
+				EE886C062474463D00752672 /* APIResponse.swift */,
 			);
 			name = APIResponses;
 			sourceTree = "<group>";
@@ -199,8 +217,14 @@
 				EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */,
 				EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */,
 				EEC24D992473E4B1004FD970 /* StudentInformationResults.swift in Sources */,
+				EEC24D9D2473E7BE004FD970 /* Session.swift in Sources */,
+				EE886C072474463D00752672 /* APIResponse.swift in Sources */,
+				EEC24D9F2473E825004FD970 /* SessionResponse.swift in Sources */,
 				EEC24D7B2473CEBC004FD970 /* SceneDelegate.swift in Sources */,
 				EEC24D932473DFE7004FD970 /* APIClient.swift in Sources */,
+				EEC24D9B2473E776004FD970 /* Account.swift in Sources */,
+				EEC24DA12473E971004FD970 /* UserCredentials.swift in Sources */,
+				EEC24DA32473E9DA004FD970 /* LoginRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
