@@ -183,13 +183,24 @@
         <scene sceneID="lWR-Y3-Pvc">
             <objects>
                 <tabBarController id="Wvh-Ow-ROp" customClass="TabBarController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="On the Map" id="e9D-k4-TRR"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="e9D-k4-TRR">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add" image="icon_addpin" id="LZg-t2-Zxa"/>
+                            <barButtonItem title="Refresh" image="icon_refresh" id="LJS-fK-uhL">
+                                <connections>
+                                    <action selector="refresh:" destination="Wvh-Ow-ROp" id="Siv-Oe-MZf"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LqK-dC-iPX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <outlet property="addPinBarButton" destination="LZg-t2-Zxa" id="EV4-Dr-EfX"/>
+                        <outlet property="refreshBarButton" destination="LJS-fK-uhL" id="PFA-Qr-t4b"/>
                         <segue destination="yAr-H0-wUW" kind="relationship" relationship="viewControllers" id="UD4-l6-FKj"/>
                         <segue destination="w8f-oM-gcs" kind="relationship" relationship="viewControllers" id="c04-eS-pvZ"/>
                     </connections>
@@ -200,8 +211,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_addpin" width="24" height="24"/>
         <image name="icon_listview-deselected" width="75" height="50"/>
         <image name="icon_mapview-deselected" width="75" height="50"/>
+        <image name="icon_refresh" width="24" height="24"/>
         <image name="logo-u" width="62" height="62"/>
     </resources>
 </document>

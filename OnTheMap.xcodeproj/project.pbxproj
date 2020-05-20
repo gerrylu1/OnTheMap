@@ -12,6 +12,7 @@
 		EE886C0B247461E100752672 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C0A247461E100752672 /* MapViewController.swift */; };
 		EE8F0F2A247500B100928285 /* StudentInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F0F29247500B100928285 /* StudentInformationModel.swift */; };
 		EE8F0F2C2475082700928285 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F0F2B2475082700928285 /* AlertController.swift */; };
+		EE8F0F2E2475404800928285 /* DataViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F0F2D2475404800928285 /* DataViewControllerProtocol.swift */; };
 		EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D782473CEBC004FD970 /* AppDelegate.swift */; };
 		EEC24D7B2473CEBC004FD970 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */; };
 		EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D7C2473CEBC004FD970 /* LoginViewController.swift */; };
@@ -34,6 +35,7 @@
 		EE886C0A247461E100752672 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EE8F0F29247500B100928285 /* StudentInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationModel.swift; sourceTree = "<group>"; };
 		EE8F0F2B2475082700928285 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		EE8F0F2D2475404800928285 /* DataViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewControllerProtocol.swift; sourceTree = "<group>"; };
 		EEC24D752473CEBC004FD970 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC24D782473CEBC004FD970 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				EEC24D7C2473CEBC004FD970 /* LoginViewController.swift */,
 				EE886C08247453CD00752672 /* TabBarController.swift */,
 				EE886C0A247461E100752672 /* MapViewController.swift */,
+				EE8F0F2D2475404800928285 /* DataViewControllerProtocol.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				EEC24D972473E0B9004FD970 /* StudentInformation.swift in Sources */,
 				EE886C09247453CD00752672 /* TabBarController.swift in Sources */,
 				EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */,
+				EE8F0F2E2475404800928285 /* DataViewControllerProtocol.swift in Sources */,
 				EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */,
 				EEC24D992473E4B1004FD970 /* StudentInformationResults.swift in Sources */,
 				EEC24D9D2473E7BE004FD970 /* Session.swift in Sources */,

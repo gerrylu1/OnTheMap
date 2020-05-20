@@ -9,35 +9,20 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, DataViewControllerProtocol {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    let limit:Int = 100
-    
-    var currentSessionTask: URLSessionTask?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        currentSessionTask = APIClient.getStudentLocation(limit: limit, completion: handleLocationDataResponse(studentsInformation:error:))
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_refresh"), style: .plain, target: self, action: #selector(self.refresh))
     }
     
-    @objc func refresh() {
-        currentSessionTask = APIClient.getStudentLocation(limit: limit, completion: handleLocationDataResponse(studentsInformation:error:))
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
     }
     
-    func handleLocationDataResponse(studentsInformation: [StudentInformation], error: Error?) {
-        guard error == nil else {
-            AlertController.showAlert(title: "Get Locations Failed", message: error?.localizedDescription, on: self)
-            return
-        }
-        StudentInformationModel.studentsInformation = studentsInformation
-        loadLocationDataOnMap()
-    }
-    
-    func loadLocationDataOnMap() {
+    func loadData() {
         var annotations = [MKPointAnnotation]()
         
         for studentInformation in StudentInformationModel.studentsInformation {
@@ -55,6 +40,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotations.append(annotation)
         }
         
+        mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotations)
     }
     
