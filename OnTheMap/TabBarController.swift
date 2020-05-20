@@ -12,6 +12,7 @@ class TabBarController: UITabBarController {
     
     @IBOutlet weak var refreshBarButton: UIBarButtonItem!
     @IBOutlet weak var addPinBarButton: UIBarButtonItem!
+    @IBOutlet weak var logoutBarButton: UIBarButtonItem!
     
     let limit:Int = 100
     
@@ -19,9 +20,7 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: .plain, target: self, action: #selector(self.logout))
-        refreshBarButton.isEnabled = false
+        indicateNetworkActivity(true)
         currentSessionTask = APIClient.getStudentLocation(limit: limit, completion: handleLocationDataResponse(studentsInformation:error:))
     }
     
@@ -31,26 +30,37 @@ class TabBarController: UITabBarController {
     }
     
     @IBAction func refresh(_ sender: Any) {
-        refreshBarButton.isEnabled = false
+        indicateNetworkActivity(true)
         currentSessionTask = APIClient.getStudentLocation(limit: limit, completion: handleLocationDataResponse(studentsInformation:error:))
     }
     
-    @objc func logout() {
+    @IBAction func logout(_ sender: Any) {
+        indicateNetworkActivity(true)
+        logoutBarButton.isEnabled = false
         currentSessionTask?.cancel()
         APIClient.logout(completion: handleLogoutResponse)
     }
     
     func handleLocationDataResponse(studentsInformation: [StudentInformation], error: Error?) {
-        refreshBarButton.isEnabled = true
         guard error == nil else {
-            AlertController.showAlert(title: "Get Locations Failed", message: error?.localizedDescription, on: self)
+            if logoutBarButton.isEnabled {
+                AlertController.showAlert(title: "Get Locations Failed", message: error?.localizedDescription, on: self)
+                indicateNetworkActivity(false)
+            }
             return
         }
         StudentInformationModel.studentsInformation = studentsInformation
-        (selectedViewController as! DataViewControllerProtocol).loadData()
+        let selectedVC = selectedViewController as! DataViewControllerProtocol
+        selectedVC.reloadData()
+        indicateNetworkActivity(false)
     }
     
     func handleLogoutResponse() {
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func indicateNetworkActivity(_ networkActivity: Bool) {
+        refreshBarButton.isEnabled = !networkActivity
+        addPinBarButton.isEnabled = !networkActivity
     }
 }

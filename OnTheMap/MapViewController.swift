@@ -19,10 +19,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, DataViewController
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData()
+        reloadData()
     }
     
-    func loadData() {
+    func reloadData() {
         var annotations = [MKPointAnnotation]()
         
         for studentInformation in StudentInformationModel.studentsInformation {

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol DataViewControllerProtocol {
-    func loadData() -> Void
+    func reloadData() -> Void
 }
