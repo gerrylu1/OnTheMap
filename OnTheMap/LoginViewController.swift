@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
         guard success else {
-            showLoginFailure(message: error?.localizedDescription ?? "Unknown Error.")
+            AlertController.showAlert(title: "Login Failed", message: error?.localizedDescription, on: self)
             return
         }
         print(APIClient.Auth.sessionId)
@@ -58,13 +58,6 @@ class LoginViewController: UIViewController {
         passwordTextField.isEnabled = !loggingIn
         loginButton.isEnabled = !loggingIn
         signUpButton.isEnabled = !loggingIn
-    }
-    
-    func showLoginFailure(message: String) {
-        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        //show(alertVC, sender: nil)
-        present(alertVC, animated: true, completion: nil)
     }
     
     func addPaddingToTextField(textField: UITextField, padding: CGFloat) {

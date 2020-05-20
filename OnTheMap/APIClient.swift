@@ -10,8 +10,6 @@ import Foundation
 
 class APIClient {
     
-    static let limit = 100
-    
     struct Auth {
         static var accountKey = ""
         static var sessionId = ""
@@ -22,13 +20,13 @@ class APIClient {
         
         case session
         case signUp
-        case getStudentLocation
+        case getStudentLocation(Int)
         
         var stringValue: String {
             switch self {
             case .session: return Endpoints.base + "/session"
             case .signUp: return "https://auth.udacity.com/sign-up"
-            case .getStudentLocation: return Endpoints.base + "/StudentLocation?limit=\(limit)"
+            case .getStudentLocation(let limit): return Endpoints.base + "/StudentLocation?limit=\(limit)"
             }
         }
         
@@ -73,7 +71,18 @@ class APIClient {
         task.resume()
     }
     
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, skipFirst5Characters: Bool = false, completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func getStudentLocation(limit: Int, completion: @escaping ([StudentInformation], Error?) -> Void) -> URLSessionTask {
+        let task = taskForGETRequest(url: Endpoints.getStudentLocation(limit).url, responseType: StudentInformationResults.self) { (responseObject, error) in
+            guard let responseObject = responseObject else {
+                completion([], error)
+                return
+            }
+            completion(responseObject.results, nil)
+        }
+        return task
+    }
+    
+    @discardableResult class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, skipFirst5Characters: Bool = false, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             parseData(responseType: ResponseType.self, data: data, error: error, skipFirst5Characters: skipFirst5Characters) { (responseObject, error) in
                 DispatchQueue.main.async {
@@ -82,9 +91,10 @@ class APIClient {
             }
         }
         task.resume()
+        return task
     }
     
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, request body: RequestType, skipFirst5Characters: Bool = false, completion: @escaping (ResponseType?, Error?) -> Void) {
+    @discardableResult class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, request body: RequestType, skipFirst5Characters: Bool = false, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -97,6 +107,7 @@ class APIClient {
             }
         }
         task.resume()
+        return task
     }
     
     class func parseData<ResponseType: Decodable>(responseType: ResponseType.Type, data: Data?, error: Error?, skipFirst5Characters: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {

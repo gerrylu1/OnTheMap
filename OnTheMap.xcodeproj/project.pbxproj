@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		EE886C072474463D00752672 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C062474463D00752672 /* APIResponse.swift */; };
 		EE886C09247453CD00752672 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C08247453CD00752672 /* TabBarController.swift */; };
+		EE886C0B247461E100752672 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C0A247461E100752672 /* MapViewController.swift */; };
+		EE8F0F2A247500B100928285 /* StudentInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F0F29247500B100928285 /* StudentInformationModel.swift */; };
+		EE8F0F2C2475082700928285 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F0F2B2475082700928285 /* AlertController.swift */; };
 		EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D782473CEBC004FD970 /* AppDelegate.swift */; };
 		EEC24D7B2473CEBC004FD970 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */; };
 		EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC24D7C2473CEBC004FD970 /* LoginViewController.swift */; };
@@ -28,6 +31,9 @@
 /* Begin PBXFileReference section */
 		EE886C062474463D00752672 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		EE886C08247453CD00752672 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		EE886C0A247461E100752672 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		EE8F0F29247500B100928285 /* StudentInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationModel.swift; sourceTree = "<group>"; };
+		EE8F0F2B2475082700928285 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		EEC24D752473CEBC004FD970 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC24D782473CEBC004FD970 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE8F0F282475009E00928285 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EE8F0F29247500B100928285 /* StudentInformationModel.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		EEC24D6C2473CEBC004FD970 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +92,7 @@
 			children = (
 				EEC24D8E2473D052004FD970 /* Model */,
 				EEC24D8C2473D008004FD970 /* Controller */,
+				EEC24D8D2473D03D004FD970 /* View */,
 				EEC24D862473CEBD004FD970 /* Info.plist */,
 			);
 			path = OnTheMap;
@@ -88,9 +103,10 @@
 			children = (
 				EEC24D782473CEBC004FD970 /* AppDelegate.swift */,
 				EEC24D7A2473CEBC004FD970 /* SceneDelegate.swift */,
+				EE8F0F2B2475082700928285 /* AlertController.swift */,
 				EEC24D7C2473CEBC004FD970 /* LoginViewController.swift */,
 				EE886C08247453CD00752672 /* TabBarController.swift */,
-				EEC24D8D2473D03D004FD970 /* View */,
+				EE886C0A247461E100752672 /* MapViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -108,6 +124,7 @@
 		EEC24D8E2473D052004FD970 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EE8F0F282475009E00928285 /* Data */,
 				EEC24D8F2473DF0B004FD970 /* APIClient */,
 				EEC24D902473DF17004FD970 /* APIRequests */,
 				EEC24D912473DF33004FD970 /* APIResponses */,
@@ -224,11 +241,14 @@
 				EEC24D9D2473E7BE004FD970 /* Session.swift in Sources */,
 				EE886C072474463D00752672 /* APIResponse.swift in Sources */,
 				EEC24D9F2473E825004FD970 /* SessionResponse.swift in Sources */,
+				EE8F0F2A247500B100928285 /* StudentInformationModel.swift in Sources */,
 				EEC24D7B2473CEBC004FD970 /* SceneDelegate.swift in Sources */,
 				EEC24D932473DFE7004FD970 /* APIClient.swift in Sources */,
 				EEC24D9B2473E776004FD970 /* Account.swift in Sources */,
+				EE8F0F2C2475082700928285 /* AlertController.swift in Sources */,
 				EEC24DA12473E971004FD970 /* UserCredentials.swift in Sources */,
 				EEC24DA32473E9DA004FD970 /* LoginRequest.swift in Sources */,
+				EE886C0B247461E100752672 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

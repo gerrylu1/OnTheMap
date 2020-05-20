@@ -146,21 +146,38 @@
             </objects>
             <point key="canvasLocation" x="2280" y="462"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tzq-FA-7dg">
             <objects>
-                <viewController id="yAr-H0-wUW" sceneMemberID="viewController">
+                <viewController id="yAr-H0-wUW" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zps-O9-tWA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cac-xl-avI">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <connections>
+                                    <outlet property="delegate" destination="yAr-H0-wUW" id="CXe-ud-zSE"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cac-xl-avI" firstAttribute="trailing" secondItem="z88-Tq-jij" secondAttribute="trailing" id="07X-es-c1q"/>
+                            <constraint firstItem="cac-xl-avI" firstAttribute="top" secondItem="z88-Tq-jij" secondAttribute="top" id="9Fr-f1-qOO"/>
+                            <constraint firstItem="cac-xl-avI" firstAttribute="bottom" secondItem="z88-Tq-jij" secondAttribute="bottom" id="JQV-gi-ULt"/>
+                            <constraint firstItem="cac-xl-avI" firstAttribute="leading" secondItem="z88-Tq-jij" secondAttribute="leading" id="Jum-oi-djg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="z88-Tq-jij"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" id="go5-ii-roG"/>
+                    <connections>
+                        <outlet property="mapView" destination="cac-xl-avI" id="IHf-4E-HkY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jTI-0d-R8E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2280" y="-187"/>
+            <point key="canvasLocation" x="2279.7101449275365" y="-187.5"/>
         </scene>
         <!--On the Map-->
         <scene sceneID="lWR-Y3-Pvc">
