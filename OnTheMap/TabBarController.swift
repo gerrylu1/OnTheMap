@@ -29,9 +29,19 @@ class TabBarController: UITabBarController {
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        currentSessionTask?.cancel()
+    }
+    
     @IBAction func refresh(_ sender: Any) {
         indicateNetworkActivity(true)
         currentSessionTask = APIClient.getStudentLocation(limit: limit, completion: handleLocationDataResponse(studentsInformation:error:))
+    }
+    
+    @IBAction func addPin(_ sender: Any) {
+        let informationPostingNC = storyboard?.instantiateViewController(withIdentifier: "InformationPostingNavController") as! UINavigationController
+        present(informationPostingNC, animated: true, completion: nil)
     }
     
     @IBAction func logout(_ sender: Any) {

@@ -26,7 +26,7 @@ class APIClient {
             switch self {
             case .session: return Endpoints.base + "/session"
             case .signUp: return "https://auth.udacity.com/sign-up"
-            case .getStudentLocation(let limit): return Endpoints.base + "/StudentLocation?limit=\(limit)"
+            case .getStudentLocation(let limit): return Endpoints.base + "/StudentLocation?order=-updatedAt&limit=\(limit)"
             }
         }
         

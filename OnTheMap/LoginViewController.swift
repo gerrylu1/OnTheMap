@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
         }
         emailTextField.isEnabled = !loggingIn
         passwordTextField.isEnabled = !loggingIn
-        loginButton.isEnabled = !loggingIn
+        changeButtonTraits(button: loginButton, isEnabled: !loggingIn, alpha: loggingIn ? 0.5 : 1.0)
         signUpButton.isEnabled = !loggingIn
     }
     
@@ -65,6 +65,11 @@ class LoginViewController: UIViewController {
         textField.leftView = paddingView
         textField.rightView = paddingView
         textField.leftViewMode = UITextField.ViewMode.always
+    }
+    
+    func changeButtonTraits(button: UIButton, isEnabled: Bool, alpha: CGFloat) {
+        button.isEnabled = isEnabled
+        button.alpha = alpha
     }
     
 }
