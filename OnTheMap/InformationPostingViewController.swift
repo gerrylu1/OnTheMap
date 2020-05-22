@@ -19,6 +19,10 @@ class InformationPostingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if StudentInformationPosting.userInfoRetrieved {
+            locationTextField.text = StudentInformationPosting.locationText
+            linkTextField.text = StudentInformationPosting.studentInformationPostingRequest?.mediaURL
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +32,8 @@ class InformationPostingViewController: UIViewController {
     @IBAction func findLocation(_ sender: Any) {
         let location = locationTextField.text!
         let link = linkTextField.text!
+        StudentInformationPosting.locationText = location
+        StudentInformationPosting.studentInformationPostingRequest?.mediaURL = link
         guard !location.isEmpty && !link.isEmpty else {
             AlertController.showAlert(title: "Incomplete Information", message: "Please enter location and link.", on: self)
             return

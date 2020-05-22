@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE72C0682476C95600685C10 /* StudentInformationPostingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE72C0672476C95600685C10 /* StudentInformationPostingRequest.swift */; };
+		EE7784672477AAAB00E2A771 /* StudentInformationPosting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7784662477AAAB00E2A771 /* StudentInformationPosting.swift */; };
+		EE7784692477AE1D00E2A771 /* StudentInformationPostingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7784682477AE1D00E2A771 /* StudentInformationPostingResponse.swift */; };
+		EE77846B2477C66A00E2A771 /* StudentInformationPuttingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE77846A2477C66A00E2A771 /* StudentInformationPuttingResponse.swift */; };
 		EE886C072474463D00752672 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C062474463D00752672 /* APIResponse.swift */; };
 		EE886C09247453CD00752672 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C08247453CD00752672 /* TabBarController.swift */; };
 		EE886C0B247461E100752672 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE886C0A247461E100752672 /* MapViewController.swift */; };
@@ -33,6 +37,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE72C0672476C95600685C10 /* StudentInformationPostingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationPostingRequest.swift; sourceTree = "<group>"; };
+		EE7784662477AAAB00E2A771 /* StudentInformationPosting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationPosting.swift; sourceTree = "<group>"; };
+		EE7784682477AE1D00E2A771 /* StudentInformationPostingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationPostingResponse.swift; sourceTree = "<group>"; };
+		EE77846A2477C66A00E2A771 /* StudentInformationPuttingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationPuttingResponse.swift; sourceTree = "<group>"; };
 		EE886C062474463D00752672 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		EE886C08247453CD00752672 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EE886C0A247461E100752672 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				EE8F0F29247500B100928285 /* StudentInformationModel.swift */,
+				EE7784662477AAAB00E2A771 /* StudentInformationPosting.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -157,6 +166,7 @@
 			children = (
 				EEC24DA02473E971004FD970 /* UserCredentials.swift */,
 				EEC24DA22473E9DA004FD970 /* LoginRequest.swift */,
+				EE72C0672476C95600685C10 /* StudentInformationPostingRequest.swift */,
 			);
 			name = APIRequests;
 			sourceTree = "<group>";
@@ -166,6 +176,8 @@
 			children = (
 				EEC24D962473E0B9004FD970 /* StudentInformation.swift */,
 				EEC24D982473E4B1004FD970 /* StudentInformationResults.swift */,
+				EE7784682477AE1D00E2A771 /* StudentInformationPostingResponse.swift */,
+				EE77846A2477C66A00E2A771 /* StudentInformationPuttingResponse.swift */,
 				EEC24D9A2473E776004FD970 /* Account.swift */,
 				EEC24D9C2473E7BE004FD970 /* Session.swift */,
 				EEC24D9E2473E825004FD970 /* SessionResponse.swift */,
@@ -250,6 +262,7 @@
 				EEC24D7D2473CEBC004FD970 /* LoginViewController.swift in Sources */,
 				EE9CD39B2475A94F006D2BDF /* InformationPostingMapViewController.swift in Sources */,
 				EE9CD39924758D0D006D2BDF /* InformationPostingViewController.swift in Sources */,
+				EE7784692477AE1D00E2A771 /* StudentInformationPostingResponse.swift in Sources */,
 				EE8F0F2E2475404800928285 /* DataViewControllerProtocol.swift in Sources */,
 				EEC24D792473CEBC004FD970 /* AppDelegate.swift in Sources */,
 				EEC24D992473E4B1004FD970 /* StudentInformationResults.swift in Sources */,
@@ -260,7 +273,10 @@
 				EE8F0F2A247500B100928285 /* StudentInformationModel.swift in Sources */,
 				EEC24D7B2473CEBC004FD970 /* SceneDelegate.swift in Sources */,
 				EEC24D932473DFE7004FD970 /* APIClient.swift in Sources */,
+				EE72C0682476C95600685C10 /* StudentInformationPostingRequest.swift in Sources */,
+				EE77846B2477C66A00E2A771 /* StudentInformationPuttingResponse.swift in Sources */,
 				EEC24D9B2473E776004FD970 /* Account.swift in Sources */,
+				EE7784672477AAAB00E2A771 /* StudentInformationPosting.swift in Sources */,
 				EE8F0F2C2475082700928285 /* AlertController.swift in Sources */,
 				EEC24DA12473E971004FD970 /* UserCredentials.swift in Sources */,
 				EEC24DA32473E9DA004FD970 /* LoginRequest.swift in Sources */,

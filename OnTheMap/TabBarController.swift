@@ -20,8 +20,8 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        indicateNetworkActivity(true)
-        currentSessionTask = APIClient.getStudentLocation(limit: limit, completion: handleLocationDataResponse(studentsInformation:error:))
+        getLocationData()
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshAfterLocationUpdate(_:)), name: NSNotification.Name(rawValue: "RefreshNotification"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,13 +35,44 @@ class TabBarController: UITabBarController {
     }
     
     @IBAction func refresh(_ sender: Any) {
+        getLocationData()
+    }
+    
+    @objc func refreshAfterLocationUpdate(_ notification: Notification) {
+        getLocationData()
+    }
+    
+    func getLocationData() {
         indicateNetworkActivity(true)
-        currentSessionTask = APIClient.getStudentLocation(limit: limit, completion: handleLocationDataResponse(studentsInformation:error:))
+        currentSessionTask = APIClient.getStudentLocations(limit: limit, completion: handleLocationDataResponse(studentsInformation:error:))
     }
     
     @IBAction func addPin(_ sender: Any) {
-        let informationPostingNC = storyboard?.instantiateViewController(withIdentifier: "InformationPostingNavController") as! UINavigationController
-        present(informationPostingNC, animated: true, completion: nil)
+        let informationPostingNC = self.storyboard?.instantiateViewController(withIdentifier: "InformationPostingNavController") as! UINavigationController
+        if StudentInformationPosting.userInfoRetrieved {
+            if StudentInformationPosting.objectId == nil {
+                present(informationPostingNC, animated: true, completion: nil)
+            }
+            else {
+                AlertController.showAlertOKCancel(title: "Student Location Existed", message: "You have already posted a student location. Would you like to overwrite your current location?", on: self) {
+                    self.present(informationPostingNC, animated: true, completion: nil)
+                }
+            }
+        }
+        else {
+            indicateNetworkActivity(true)
+            currentSessionTask = APIClient.getPublicUserData { (success, error) in
+                guard success else {
+                    if self.logoutBarButton.isEnabled {
+                        AlertController.showAlert(title: "Get User Data For Pin Adding Failed", message: error?.localizedDescription, on: self)
+                        self.indicateNetworkActivity(false)
+                    }
+                    return
+                }
+                self.present(informationPostingNC, animated: true, completion: nil)
+                self.indicateNetworkActivity(false)
+            }
+        }
     }
     
     @IBAction func logout(_ sender: Any) {
@@ -66,6 +97,7 @@ class TabBarController: UITabBarController {
     }
     
     func handleLogoutResponse() {
+        StudentInformationPosting.clear()
         navigationController?.popToRootViewController(animated: true)
     }
     

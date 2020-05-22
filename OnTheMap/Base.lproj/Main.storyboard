@@ -280,7 +280,7 @@
                         <outlet property="findButton" destination="Aw9-CI-2MA" id="obb-Kx-I2b"/>
                         <outlet property="linkTextField" destination="q2g-ZD-KMf" id="hYz-mE-h0M"/>
                         <outlet property="locationTextField" destination="7RO-Zm-vqw" id="hSx-Qg-Bsd"/>
-                        <segue destination="noh-Af-MiL" kind="show" id="DZb-Fa-Jnr"/>
+                        <segue destination="noh-Af-MiL" kind="show" identifier="completeGeocoding" id="DZb-Fa-Jnr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k6W-9F-aGq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -316,6 +316,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="finish:" destination="noh-Af-MiL" eventType="touchUpInside" id="CQZ-xH-pmc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -331,7 +334,7 @@
                         <viewLayoutGuide key="safeArea" id="9PR-WZ-J2X"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Location" id="HVT-Ho-1sh">
-                        <barButtonItem key="leftBarButtonItem" title="Back" style="plain" id="dvH-uT-avU">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="dvH-uT-avU">
                             <connections>
                                 <action selector="back:" destination="noh-Af-MiL" id="bF6-ZV-fFD"/>
                             </connections>

@@ -17,6 +17,7 @@ class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, 
     @IBOutlet weak var backBarButton: UIBarButtonItem!
     
     var placemark: CLPlacemark? = nil
+    var mapString = ""
     var currentSessionTask: URLSessionTask?
     
     override func viewDidLoad() {
@@ -47,11 +48,11 @@ class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, 
             return
         }
         
-        let title = [placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.administrativeArea, placemark.postalCode, placemark.country].compactMap({ $0 }).joined(separator: ", ")
+        mapString = [placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.administrativeArea, placemark.postalCode, placemark.country].compactMap({ $0 }).joined(separator: ", ")
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = title
+        annotation.title = mapString
         
         mapView.addAnnotation(annotation)
         mapView.showAnnotations([annotation], animated: true)
@@ -74,13 +75,39 @@ class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, 
         return pinView
     }
     
-    func changeButtonTraits(button: UIButton, isEnabled: Bool, alpha: CGFloat) {
-        button.isEnabled = isEnabled
-        button.alpha = alpha
+    @IBAction func finish(_ sender: Any) {
+        guard let coordinate = placemark?.location?.coordinate else {
+            AlertController.showAlert(title: "Error", message: "Unknown error", on: self)
+            return
+        }
+        changeButtonTraits(button: finishButton, isEnabled: false, alpha: 0.5)
+        StudentInformationPosting.studentInformationPostingRequest?.latitude = coordinate.latitude
+        StudentInformationPosting.studentInformationPostingRequest?.longitude = coordinate.longitude
+        StudentInformationPosting.studentInformationPostingRequest?.mapString = mapString
+        if let objectId = StudentInformationPosting.objectId {
+            currentSessionTask = APIClient.putStudentLocation(objectId: objectId, completion: handleResponseForAddingLocation(success:error:))
+        }
+        else {
+            currentSessionTask = APIClient.postStudentLocation(completion: handleResponseForAddingLocation(success:error:))
+        }
     }
     
     @IBAction func back(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
+    func handleResponseForAddingLocation(success: Bool, error: Error?) {
+        guard success else {
+            AlertController.showAlert(title: "Adding Location Failed", message: error?.localizedDescription, on: self)
+            changeButtonTraits(button: finishButton, isEnabled: true, alpha: 1)
+            return
+        }
+        dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshNotification"), object: nil)
+    }
+    
+    func changeButtonTraits(button: UIButton, isEnabled: Bool, alpha: CGFloat) {
+        button.isEnabled = isEnabled
+        button.alpha = alpha
+    }
 }

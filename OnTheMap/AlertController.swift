@@ -16,4 +16,13 @@ class AlertController: UIViewController {
         viewController.present(alertVC, animated: true, completion: nil)
     }
     
+    class func showAlertOKCancel(title: String?, message: String?, on viewController: UIViewController, completion: @escaping () -> Void) {
+        let alertVC = UIAlertController(title: title ?? "", message: message ?? "Unknown message.", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { (alertAction) in
+            completion()
+        }))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        viewController.present(alertVC, animated: true, completion: nil)
+    }
+    
 }

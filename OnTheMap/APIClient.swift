@@ -20,13 +20,19 @@ class APIClient {
         
         case session
         case signUp
-        case getStudentLocation(Int)
+        case getStudentLocations(Int)
+        case getPublicUserData
+        case postStudentLocation
+        case putStudentLocation(String)
         
         var stringValue: String {
             switch self {
             case .session: return Endpoints.base + "/session"
             case .signUp: return "https://auth.udacity.com/sign-up"
-            case .getStudentLocation(let limit): return Endpoints.base + "/StudentLocation?order=-updatedAt&limit=\(limit)"
+            case .getStudentLocations(let limit): return Endpoints.base + "/StudentLocation?order=-updatedAt&limit=\(limit)"
+            case .getPublicUserData: return Endpoints.base + "/users/\(Auth.accountKey)"
+            case .postStudentLocation: return Endpoints.base + "/StudentLocation"
+            case .putStudentLocation(let objectId): return Endpoints.base + "/StudentLocation/\(objectId)"
             }
         }
         
@@ -71,13 +77,73 @@ class APIClient {
         task.resume()
     }
     
-    class func getStudentLocation(limit: Int, completion: @escaping ([StudentInformation], Error?) -> Void) -> URLSessionTask {
-        let task = taskForGETRequest(url: Endpoints.getStudentLocation(limit).url, responseType: StudentInformationResults.self) { (responseObject, error) in
+    class func getStudentLocations(limit: Int, completion: @escaping ([StudentInformation], Error?) -> Void) -> URLSessionTask {
+        let task = taskForGETRequest(url: Endpoints.getStudentLocations(limit).url, responseType: StudentInformationResults.self) { (responseObject, error) in
             guard let responseObject = responseObject else {
                 completion([], error)
                 return
             }
             completion(responseObject.results, nil)
+        }
+        return task
+    }
+    
+    class func getPublicUserData(completion: @escaping (Bool, Error?) -> Void) -> URLSessionTask? {
+        let task = URLSession.shared.dataTask(with: Endpoints.getPublicUserData.url) { (data, response, error) in
+            guard var data = data else {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+                return
+            }
+            data = data.dropFirst(5)
+            do {
+                if let userDataDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
+                    let firstName = userDataDict["first_name"] as! String
+                    let lastName = userDataDict["last_name"] as! String
+                    let key = userDataDict["key"] as! String
+                    let studentInformationPostingRequest = StudentInformationPostingRequest(uniqueKey: key, firstName: firstName, lastName: lastName, mapString: "", mediaURL: "", latitude: 0, longitude: 0)
+                    StudentInformationPosting.studentInformationPostingRequest = studentInformationPostingRequest
+                    StudentInformationPosting.userInfoRetrieved = true
+                    DispatchQueue.main.async {
+                        completion(true, nil)
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                        completion(false, error)
+                    }
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        }
+        task.resume()
+        return task
+    }
+    
+    class func postStudentLocation(completion: @escaping (Bool, Error?) -> Void) -> URLSessionTask? {
+        let task = taskForPOSTRequest(url: Endpoints.postStudentLocation.url, responseType: StudentInformationPostingResponse.self, request: StudentInformationPosting.studentInformationPostingRequest!) { (responseObject, error) in
+            guard let responseObject = responseObject else {
+                completion(false, error)
+                return
+            }
+            StudentInformationPosting.objectId = responseObject.objectId
+            completion(true, nil)
+        }
+        return task
+    }
+    
+    class func putStudentLocation(objectId: String, completion: @escaping (Bool, Error?) -> Void) -> URLSessionTask? {
+        let task = taskForPUTRequest(url: Endpoints.putStudentLocation(objectId).url, responseType: StudentInformationPuttingResponse.self, request: StudentInformationPosting.studentInformationPostingRequest!) { (responseObject, error) in
+            guard responseObject != nil else {
+                completion(false, error)
+                return
+            }
+            completion(true, nil)
         }
         return task
     }
@@ -110,16 +176,30 @@ class APIClient {
         return task
     }
     
+    @discardableResult class func taskForPUTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, request body: RequestType, skipFirst5Characters: Bool = false, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask {
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try! JSONEncoder().encode(body)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            parseData(responseType: ResponseType.self, data: data, error: error, skipFirst5Characters: skipFirst5Characters) { (responseObject, error) in
+                DispatchQueue.main.async {
+                    completion(responseObject, error)
+                }
+            }
+        }
+        task.resume()
+        return task
+    }
+    
     class func parseData<ResponseType: Decodable>(responseType: ResponseType.Type, data: Data?, error: Error?, skipFirst5Characters: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
         guard var data = data else {
             completion(nil, error)
             return
         }
         if skipFirst5Characters {
-            let range = 5..<data.count
-            data = data.subdata(in: range)
+            data = data.dropFirst(5)
         }
-        //print(String(decoding: data, as: UTF8.self))
         do {
             let responseObject = try JSONDecoder().decode(ResponseType.self, from: data)
             completion(responseObject, nil)
