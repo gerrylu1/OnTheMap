@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
         guard success else {
-            AlertController.showAlert(title: "Login Failed", message: error?.localizedDescription, on: self)
+            showAlert(title: "Login Failed", message: error?.localizedDescription, on: self)
             return
         }
         print(APIClient.Auth.sessionId)
@@ -48,12 +48,7 @@ class LoginViewController: UIViewController {
     }
     
     func setLoggingIn(_ loggingIn: Bool) {
-        if loggingIn {
-            activityIndicator.startAnimating()
-        }
-        else {
-            activityIndicator.stopAnimating()
-        }
+        loggingIn ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
         emailTextField.isEnabled = !loggingIn
         passwordTextField.isEnabled = !loggingIn
         changeButtonTraits(button: loginButton, isEnabled: !loggingIn, alpha: loggingIn ? 0.5 : 1.0)

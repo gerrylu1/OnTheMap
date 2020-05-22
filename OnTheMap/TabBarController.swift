@@ -54,7 +54,7 @@ class TabBarController: UITabBarController {
                 present(informationPostingNC, animated: true, completion: nil)
             }
             else {
-                AlertController.showAlertOKCancel(title: "Student Location Existed", message: "You have already posted a student location. Would you like to overwrite your current location?", on: self) {
+                showAlertOKCancel(title: "Student Location Existed", message: "You have already posted a student location. Would you like to overwrite your current location?", on: self) {
                     self.present(informationPostingNC, animated: true, completion: nil)
                 }
             }
@@ -64,7 +64,7 @@ class TabBarController: UITabBarController {
             currentSessionTask = APIClient.getPublicUserData { (success, error) in
                 guard success else {
                     if self.logoutBarButton.isEnabled {
-                        AlertController.showAlert(title: "Get User Data For Pin Adding Failed", message: error?.localizedDescription, on: self)
+                        self.showAlert(title: "Get User Data For Pin Adding Failed", message: error?.localizedDescription, on: self)
                         self.indicateNetworkActivity(false)
                     }
                     return
@@ -85,7 +85,7 @@ class TabBarController: UITabBarController {
     func handleLocationDataResponse(studentsInformation: [StudentInformation], error: Error?) {
         guard error == nil else {
             if logoutBarButton.isEnabled {
-                AlertController.showAlert(title: "Get Locations Failed", message: error?.localizedDescription, on: self)
+                showAlert(title: "Get Locations Failed", message: error?.localizedDescription, on: self)
                 indicateNetworkActivity(false)
             }
             return

@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, DataViewControllerProtocol {
+class InformationPostingMapViewController: UIViewController, DataViewControllerProtocol {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var finishButton: UIButton!
@@ -19,10 +19,6 @@ class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, 
     var placemark: CLPlacemark? = nil
     var mapString = ""
     var currentSessionTask: URLSessionTask?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,12 +35,12 @@ class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, 
         mapView.removeAnnotations(mapView.annotations)
         
         guard let placemark = placemark else {
-            AlertController.showAlert(title: "Error", message: "No placemark object. Please go back to edit the location and try again.", on: self)
+            showAlert(title: "Error", message: "No placemark object. Please go back to edit the location and try again.", on: self)
             return
         }
         
         guard let coordinate = placemark.location?.coordinate else {
-            AlertController.showAlert(title: "Error", message: "Cannot retrieve map coordination. Please go back to edit the location and try again.", on: self)
+            showAlert(title: "Error", message: "Cannot retrieve map coordination. Please go back to edit the location and try again.", on: self)
             return
         }
         
@@ -60,24 +56,9 @@ class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, 
         changeButtonTraits(button: finishButton, isEnabled: true, alpha: 1)
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView?.canShowCallout = true
-            pinView?.pinTintColor = .red
-        }
-        else {
-            pinView?.annotation = annotation
-        }
-        
-        return pinView
-    }
-    
     @IBAction func finish(_ sender: Any) {
         guard let coordinate = placemark?.location?.coordinate else {
-            AlertController.showAlert(title: "Error", message: "Unknown error", on: self)
+            showAlert(title: "Error", message: "Unknown error", on: self)
             return
         }
         changeButtonTraits(button: finishButton, isEnabled: false, alpha: 0.5)
@@ -98,7 +79,7 @@ class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, 
     
     func handleResponseForAddingLocation(success: Bool, error: Error?) {
         guard success else {
-            AlertController.showAlert(title: "Adding Location Failed", message: error?.localizedDescription, on: self)
+            showAlert(title: "Adding Location Failed", message: error?.localizedDescription, on: self)
             changeButtonTraits(button: finishButton, isEnabled: true, alpha: 1)
             return
         }
@@ -110,4 +91,23 @@ class InformationPostingMapViewController: UIViewController, MKMapViewDelegate, 
         button.isEnabled = isEnabled
         button.alpha = alpha
     }
+}
+
+extension InformationPostingMapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            pinView?.pinTintColor = .red
+        }
+        else {
+            pinView?.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
 }

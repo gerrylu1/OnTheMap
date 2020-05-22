@@ -9,13 +9,9 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate, DataViewControllerProtocol {
+class MapViewController: UIViewController, DataViewControllerProtocol {
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,6 +39,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, DataViewController
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotations)
     }
+    
+}
+
+extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"

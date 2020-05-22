@@ -25,17 +25,13 @@ class InformationPostingViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     @IBAction func findLocation(_ sender: Any) {
         let location = locationTextField.text!
         let link = linkTextField.text!
         StudentInformationPosting.locationText = location
         StudentInformationPosting.studentInformationPostingRequest?.mediaURL = link
         guard !location.isEmpty && !link.isEmpty else {
-            AlertController.showAlert(title: "Incomplete Information", message: "Please enter location and link.", on: self)
+            showAlert(title: "Incomplete Information", message: "Please enter location and link.", on: self)
             return
         }
         indicateNetworkActivity(true)
@@ -49,11 +45,11 @@ class InformationPostingViewController: UIViewController {
     func handleGeocodeResponse(placemark: [CLPlacemark]?, error: Error?) {
         indicateNetworkActivity(false)
         guard let placemark = placemark else {
-            AlertController.showAlert(title: "Geocoding Failed", message: error?.localizedDescription, on: self)
+            showAlert(title: "Geocoding Failed", message: error?.localizedDescription, on: self)
             return
         }
         guard placemark.count > 0 else {
-            AlertController.showAlert(title: "Geocoding Failed", message: "No corresponding placemarks to the entered location.", on: self)
+            showAlert(title: "Geocoding Failed", message: "No corresponding placemarks to the entered location.", on: self)
             return
         }
         let controller = storyboard?.instantiateViewController(withIdentifier: "InformationPostingMapViewController") as! InformationPostingMapViewController
@@ -62,12 +58,7 @@ class InformationPostingViewController: UIViewController {
     }
     
     func indicateNetworkActivity(_ networkActivity: Bool) {
-        if networkActivity {
-            activityIndicator.startAnimating()
-        }
-        else {
-            activityIndicator.stopAnimating()
-        }
+        networkActivity ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
         changeButtonTraits(button: findButton, isEnabled: !networkActivity, alpha: networkActivity ? 0.5 : 1.0)
         cancelBarButton.isEnabled = !networkActivity
         locationTextField.isEnabled = !networkActivity
