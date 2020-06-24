@@ -67,6 +67,7 @@
 		EEC24D9E2473E825004FD970 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
 		EEC24DA02473E971004FD970 /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		EEC24DA22473E9DA004FD970 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		EEDAE75824A3B765006FBA0A /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +110,7 @@
 		EEC24D772473CEBC004FD970 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				EEDAE75824A3B765006FBA0A /* OnTheMap.entitlements */,
 				EEC24D8E2473D052004FD970 /* Model */,
 				EEC24D8C2473D008004FD970 /* Controller */,
 				EEC24D8D2473D03D004FD970 /* View */,
@@ -426,6 +428,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TU6WP44FZA;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
@@ -435,6 +438,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanodegree.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -444,6 +448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TU6WP44FZA;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
@@ -453,6 +458,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanodegree.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
